@@ -3,9 +3,10 @@ variable "project" {
   description = "Project name"
 }
 
-variable "env" {
+variable "environment" {
   type        = string
   description = "Environment name"
+  default     = "dev"
 }
 
 variable "resource_group" {
