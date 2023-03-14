@@ -9,6 +9,16 @@ terraform {
       version = "2.19.1"
     }
   }
+  backend "azurerm" {
+        subscription_id      = "f6fcb95e-6b4e-41e8-96f9-44fb1dfd8c22"
+        tenant_id            = "e7b21e91-c04e-4b80-9ce7-2456ee9519cd"
+        client_id            = "a3c9abce-1170-485c-8d3f-4def849160ab"
+        client_secret        = "GQH8Q~gvpVNFkyzXw_79Ajb-vqbrjSOQozZ6tahc"
+        resource_group_name  = "AJDatabricksSetupResourceGroup"
+        storage_account_name = "ajdatabrickssetupsa"
+        container_name       = "tfstate"
+        key                  = "terraform.tfstate"
+    }
 }
 #access secret value GQH8Q~gvpVNFkyzXw_79Ajb-vqbrjSOQozZ6tahc
 #access secret ID    a0df064e-4c12-4403-b727-96b3b57f620e
@@ -21,7 +31,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = "AJTerraformResourceGroup"
+  name     = "AJTerraformResourceGrouptststs"
   location = "Canada Central"
 }
 
