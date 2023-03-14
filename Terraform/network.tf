@@ -42,11 +42,11 @@ resource "azurerm_subnet" "private" {
 #}
 
 resource "azurerm_subnet" "public" {
-  name = "vc_databricks_public_subnet"
+  name = "aj_databricks_public_subnet"
 
   resource_group_name  = "${var.resource_group_name}"
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = ["42.0.1.0/24"]
 
   delegation {
     name = "databricks-delegation"
