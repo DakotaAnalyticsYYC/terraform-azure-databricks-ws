@@ -53,7 +53,7 @@ terraform {
 provider "azuread" { #local name for provider to be used
 
 }
-provider "azurerm" { #local name for provider to be used
+provider "azurerm1" { #local name for provider to be used
   features {}        #required block
 }
 
