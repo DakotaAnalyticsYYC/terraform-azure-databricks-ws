@@ -1,18 +1,18 @@
 resource "azurerm_virtual_network" "this" {
-  name = "vc_databricks_virtual_network"
+  name = "aj_databricks_virtual_network"
 
-  location            = azurerm_resource_group.this.location
-  resource_group_name = azurerm_resource_group.this.name
+  location            = "${var.location}"
+  resource_group_name = "${var.resource_group_name}"
 
-  address_space = ["10.0.0.0/16"]
+  address_space = ["42.0.0.0/16"]
 }
 
 resource "azurerm_subnet" "private" {
-  name = "vc_databricks_private_subnet"
+  name = "aj_databricks_private_subnet"
 
-  resource_group_name  = azurerm_resource_group.this.name
+  resource_group_name  = "${var.resource_group_name}"
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["10.0.0.0/24"]
+  address_prefixes     = ["42.0.0.0/24"]
 
   delegation {
     name = "databricks-delegation"
@@ -44,7 +44,7 @@ resource "azurerm_subnet" "private" {
 resource "azurerm_subnet" "public" {
   name = "vc_databricks_public_subnet"
 
-  resource_group_name  = azurerm_resource_group.this.name
+  resource_group_name  = "${var.resource_group_name}"
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.1.0/24"]
 
