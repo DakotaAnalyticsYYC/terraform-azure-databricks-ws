@@ -43,3 +43,8 @@ variable "container_name" {
   description = "Company name to be used in resource creation"
   default     = "tfstate" 
 }  
+variable "key_vault_names" {
+  type        = list(string)
+  description = "Company name to be used in resource creation"
+  default     = ["keyvaultdbprodvvvv","keyvaultdbtestvincenzooo"] 
+}  
