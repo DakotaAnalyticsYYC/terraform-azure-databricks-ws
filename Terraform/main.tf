@@ -30,8 +30,16 @@ provider "azurerm" {
   client_secret               = "GQH8Q~gvpVNFkyzXw_79Ajb-vqbrjSOQozZ6tahc"
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "AJTerraformResourceGrouptststs"
-  location = "Canada Central"
-}
 
+#this step creates a key vault and sets it to role based access control
+resource "azurerm_key_vault" "key_vault" {
+  name                        = "Vincenzooooooookeyvault"               #required
+  location                    = "Canada Central"#required
+  resource_group_name         = "AJDatabricksSetupResourceGroup"    #required
+  enabled_for_disk_encryption = true
+  tenant_id                   = "e7b21e91-c04e-4b80-9ce7-2456ee9519cd"
+  soft_delete_retention_days  = 7
+  purge_protection_enabled    = false
+  sku_name                    = "standard"
+  enable_rbac_authorization   = true
+}
