@@ -1,8 +1,8 @@
 #this step creates the hierarchical storage/datalake for unity catalog
 resource "azurerm_storage_account" "storage_account_lake" {
   name                     = each.value              #required
-  resource_group_name      = "${var.resource_group_name}"     #required
-  location                 = "${var.location}" #required
+  resource_group_name      = var.resource_group_name     #required
+  location                 = var.location #required
   account_tier             = "Standard"
   account_replication_type = "GRS"
   account_kind             = "StorageV2"

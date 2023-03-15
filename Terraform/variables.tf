@@ -95,18 +95,20 @@ variable "public_subnets" {
 
 }
 
-#variable "databricksresources" {
-#  type        = map(any)
-#  description = "Subnet array with address prefixes"
-#  default     = {
-#    databricks_prod = {
-#    name = "databricksprod"
-#    address_prefixes = ["42.2.0.0/20"]
-#  }
-#      databricks_dev = {
-#    name = "public_subnet_dev"
-#    address_prefixes = ["42.4.0.0/20"]
-#  }
-#}  
-#
-#}
+variable "databricks_resources" {
+  type        = map(any)
+  description = "Subnet array with address prefixes"
+  default     = {
+    databricks_prod = {
+    name = "databricks_prod"
+    public_subnet_name = "public_subnet_prod"
+    private_subnet_name = "private_subnet_prod"
+  }
+      databricks_dev = {
+    name = "databricks_dev"
+    public_subnet_name = "public_subnet_dev"
+    private_subnet_name = "private_subnet_dev"
+  }
+}  
+
+}
