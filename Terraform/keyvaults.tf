@@ -7,7 +7,7 @@ resource "azurerm_key_vault" "key_vault" {
   tenant_id                   = "${var.tenant_id}"
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
-  sku_name                    = "standard"
+  sku_name                    = "${var.databricks_sku}" 
   enable_rbac_authorization   = true
   for_each = toset(var.key_vault_names)
 }

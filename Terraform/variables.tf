@@ -46,7 +46,7 @@ variable "container_name" {
 variable "key_vault_names" {
   type        = list(string)
   description = "Company name to be used in resource creation"
-  default     = ["keyvaultdbprodvvvv","keyvaultdbtestvincenzooo"] 
+  default     = ["kvdbproddakota","kvdbtestdakota"] 
 }  
 variable "databricks_resource_names" {
   type        = list(string)
@@ -56,10 +56,11 @@ variable "databricks_resource_names" {
 variable "databricks_sku" {
   type        = string
   description = "Company name to be used in resource creation"
-  default     = "Standard" #be changed depending on the site
+  default     = "standard" #be changed depending on the site
 }  
 variable "storage_account_names" {
   type        = list(string)
   description = "Company name to be used in resource creation"
-  default     = ["landing_sa","unity_sa"] 
+  default     = ["landingsadakota","unitysadakota"] 
 }  
+
