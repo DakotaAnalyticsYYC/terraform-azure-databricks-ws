@@ -63,4 +63,50 @@ variable "storage_account_names" {
   description = "Company name to be used in resource creation"
   default     = ["landingsadakota","unitysadakota"] 
 }  
+variable "private_subnets" {
+  type        = map(any)
+  description = "Subnet array with address prefixes"
+  default     = {
 
+        private_subnet_prod = {
+    name = "private_subnet_prod"
+    address_prefixes = ["42.0.0.0/24"]
+  }
+          private_subnet_dev = {
+    name = "private_subnet_dev"
+    address_prefixes = ["42.0.1.0/24"]
+  }
+}  
+
+}
+variable "public_subnets" {
+  type        = map(any)
+  description = "Subnet array with address prefixes"
+  default     = {
+    public_subnet_prod = {
+    name = "public_subnet_prod"
+    address_prefixes = ["42.0.2.0/24"]
+  }
+      public_subnet_dev = {
+    name = "public_subnet_dev"
+    address_prefixes = ["42.0.3.0/24"]
+  }
+}  
+
+}
+
+#variable "databricksresources" {
+#  type        = map(any)
+#  description = "Subnet array with address prefixes"
+#  default     = {
+#    databricks_prod = {
+#    name = "databricksprod"
+#    address_prefixes = ["42.2.0.0/20"]
+#  }
+#      databricks_dev = {
+#    name = "public_subnet_dev"
+#    address_prefixes = ["42.4.0.0/20"]
+#  }
+#}  
+#
+#}

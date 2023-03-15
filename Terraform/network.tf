@@ -7,12 +7,34 @@ resource "azurerm_virtual_network" "this" {
   address_space = ["42.0.0.0/16"]
 }
 
+#resource "azurerm_subnet" "private" {
+#  name = "aj_databricks_private_subnet"
+#
+#  resource_group_name  = "${var.resource_group_name}"
+#  virtual_network_name = azurerm_virtual_network.this.name
+#  address_prefixes     = ["42.0.0.0/24"]
+#
+#  delegation {
+#    name = "databricks-delegation"
+#
+#    service_delegation {
+#      name = "Microsoft.Databricks/workspaces"
+#      actions = [
+#        "Microsoft.Network/virtualNetworks/subnets/join/action",
+#        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+#        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+#      ]
+#    }
+#  }
+#}
+
 resource "azurerm_subnet" "private" {
-  name = "aj_databricks_private_subnet"
+  for_each=var.private_subnets
+  name = each.value["name"]
 
   resource_group_name  = "${var.resource_group_name}"
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["42.0.0.0/24"]
+  address_prefixes     = each.value["address_prefixes"]
 
   delegation {
     name = "databricks-delegation"
@@ -27,26 +49,14 @@ resource "azurerm_subnet" "private" {
     }
   }
 }
-
-# "azurerm_network_security_group" "private" {
-#  name = format("nsg-%s-%s-%s-priv",
-#  local.naming.location[var.location], var.environment, var.project)
-
-#  resource_group_name = azurerm_resource_group.this.name
-#  location            = azurerm_resource_group.this.location
-#}
-
-#resource "azurerm_subnet_network_security_group_association" "private" {
-#  subnet_id                 = azurerm_subnet.private.id
-#  network_security_group_id = azurerm_network_security_group.private.id
-#}
 
 resource "azurerm_subnet" "public" {
-  name = "aj_databricks_public_subnet"
+  for_each=var.public_subnets
+  name = each.value["name"]
 
-  resource_group_name  = "${var.resource_group_name}"
+  resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.this.name
-  address_prefixes     = ["42.0.1.0/24"]
+  address_prefixes     = each.value["address_prefixes"]
 
   delegation {
     name = "databricks-delegation"
@@ -62,15 +72,24 @@ resource "azurerm_subnet" "public" {
   }
 }
 
-#resource "azurerm_network_security_group" "public" {
-#  name = format("nsg-%s-%s-%s-pub",
-#  local.naming.location[var.location], var.environment, var.project)
-
-#  resource_group_name = azurerm_resource_group.this.name
-#  location            = azurerm_resource_group.this.location
-#}
-
-#resource "azurerm_subnet_network_security_group_association" "public" {
-#  subnet_id                 = azurerm_subnet.public.id
-#  network_security_group_id = azurerm_network_security_group.public.id
+#
+#resource "azurerm_subnet" "public" {
+#  name = "aj_databricks_public_subnet"
+#
+#  resource_group_name  = "${var.resource_group_name}"
+#  virtual_network_name = azurerm_virtual_network.this.name
+#  address_prefixes     = ["42.0.1.0/24"]
+#
+#  delegation {
+#    name = "databricks-delegation"
+#
+#    service_delegation {
+#      name = "Microsoft.Databricks/workspaces"
+#      actions = [
+#        "Microsoft.Network/virtualNetworks/subnets/join/action",
+#        "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+#        "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action",
+#      ]
+#    }
+#  }
 #}
