@@ -1,7 +1,7 @@
 variable "company_name" {
   type        = string
   description = "Company name to be used in resource creation"
-  default     = "tftest2" #all lower case
+  default     = "wolftest" #all lower case
 }
 variable "location" {
   type        = string
@@ -47,4 +47,19 @@ variable "key_vault_names" {
   type        = list(string)
   description = "Company name to be used in resource creation"
   default     = ["keyvaultdbprodvvvv","keyvaultdbtestvincenzooo"] 
+}  
+variable "databricks_resource_names" {
+  type        = list(string)
+  description = "Company name to be used in resource creation"
+  default     = ["dbricksprod","dbricksdev"] 
+}  
+variable "databricks_sku" {
+  type        = string
+  description = "Company name to be used in resource creation"
+  default     = "Standard" #be changed depending on the site
+}  
+variable "storage_account_names" {
+  type        = list(string)
+  description = "Company name to be used in resource creation"
+  default     = ["landing_sa","unity_sa"] 
 }  
